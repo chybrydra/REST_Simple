@@ -2,7 +2,20 @@
 var rootURL = "http://localhost:8080/rest";
 
 // Retrieve car list when application starts
-findAll();
+showHome();
+
+function showHome(){
+    var homeInfo = "<h1>Welcome to Admin panel!</h1>";
+    $("#pageContent").html(homeInfo);
+}
+
+$("#home-option").click(function () {
+    showHome();
+});
+
+$("#cars-option").click(function () {
+    findAll();
+});
 
 function findAll() {
     console.log('findAll');
@@ -18,11 +31,11 @@ function renderList(data) {
     // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
     var list = data == null ? [] : (data instanceof Array ? data : [data]);
 
-    $('#carList li').remove();
+    $('#pageContent').html("");
     $.each(list, function(index, car) {
-        $('#carList').append("<ul>");
-        $('#carList').append("<li>" + car.id + ". " + car.brand + " " + car.model + "</li>") ;
-        $('#carList').append("</ul>");
+        $('#pageContent').append("<ul>");
+        $('#pageContent').append("<li>" + car.id + ". " + car.brand + " " + car.model + "(" + car.productionYear + ")</li>") ;
+        $('#pageContent').append("</ul>");
     });
 }
 
