@@ -9,15 +9,25 @@ function showHome(){
     $("#pageContent").html(homeInfo);
 }
 
+function changeActiveOption(newActive) {
+    $("#users-option").removeClass("active");
+    $("#home-option").removeClass("active");
+    $("#cars-option").removeClass("active");
+    $(newActive).addClass("active");
+}
+
 $("#home-option").click(function () {
+    changeActiveOption("#home-option");
     showHome();
 });
 
 $("#cars-option").click(function () {
+    changeActiveOption("#cars-option");
     listAllCars();
 });
 
 $("#users-option").click(function () {
+    changeActiveOption("#users-option");
     listAllUsers();
 });
 
