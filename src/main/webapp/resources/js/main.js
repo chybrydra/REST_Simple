@@ -14,28 +14,81 @@ $("#home-option").click(function () {
 });
 
 $("#cars-option").click(function () {
-    findAll();
+    listAllCars();
 });
 
-function findAll() {
-    console.log('findAll');
+$("#users-option").click(function () {
+    listAllUsers();
+});
+
+function listAllCars() {
+    console.log('listAllCars');
     $.ajax({
         type: 'GET',
         url: rootURL + "/cars",
         dataType: "json", // data type of response
-        success: renderList
+        success: renderCarList
     });
 }
 
-function renderList(data) {
+function listAllUsers() {
+    console.log('listAllUsers');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "/users",
+        dataType: "json", // data type of response
+        success: renderUserList
+    });
+}
+
+function renderCarList(data) {
     // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
-    var list = data == null ? [] : (data instanceof Array ? data : [data]);
+    var carList = data == null ? [] : (data instanceof Array ? data : [data]);
+    $('#pageContent').html("");
+
+    var newContent = "<table class=\"table table-dark\">";
+    newContent += "<tr>";
+    newContent += "<th>ID</th>";
+    newContent += "<th>brand</th>";
+    newContent += "<th>model</th>";
+    newContent += "<th>prod. year</th>";
+    newContent += "</tr>";
+    $.each(carList, function(index, car) {
+        newContent += "<tr>";
+        newContent += "<th>" + car.id + "</th>";
+        newContent += "<th>" + car.brand + "</th>";
+        newContent += "<th>" + car.model + "</th>";
+        newContent += "<th>" + car.productionYear + "</th>";
+        newContent += "</tr>";
+    });
+    newContent += "</table>";
+
+    $("#pageContent").append(newContent);
+}
+
+function renderUserList(data) {
+    var userList = data == null ? [] : (data instanceof Array ? data : [data]);
 
     $('#pageContent').html("");
-    $.each(list, function(index, car) {
-        $('#pageContent').append("<ul>");
-        $('#pageContent').append("<li>" + car.id + ". " + car.brand + " " + car.model + "(" + car.productionYear + ")</li>") ;
-        $('#pageContent').append("</ul>");
-    });
-}
 
+    var newContent = "<table class=\"table table-dark\">";
+    newContent += "<tr>";
+    newContent += "<th scope='col'>ID</th>";
+    newContent += "<th scope='col'>email</th>";
+    newContent += "<th scope='col'>firstname</th>";
+    newContent += "<th scope='col'>lastname</th>";
+    newContent += "<th scope='col'>password</th>";
+    newContent += "</tr>";
+    $.each(userList, function(index, user) {
+        newContent += "<tr>";
+        newContent += "<th scope='row'>" + user.id + "</th>";
+        newContent += "<th>" + user.email + "</th>";
+        newContent += "<th>" + user.firstname + "</th>";
+        newContent += "<th>" + user.lastname + "</th>";
+        newContent += "<th>" + user.password + "</th>";
+        newContent += "</tr>";
+    });
+    newContent += "</table>";
+
+    $("#pageContent").append(newContent);
+}
