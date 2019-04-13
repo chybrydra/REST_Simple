@@ -1,22 +1,37 @@
 package pl.lukaszgrymulski.models;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@Entity
+@Table(name="users")
 public class User {
 
-    int id;
-    String email;
-    String firstname;
-    String lastname;
-    String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="password")
+    private String password;
+
+    @Column(name="firstname")
+    private String firstname;
+
+    @Column(name="lastname")
+    private String lastname;
 
     public User() {
     }
 
-    public User(int id, String email, String firstname, String lastname, String password) {
-        this.id = id;
+    public User(String email, String password, String firstname, String lastname) {
         this.email = email;
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.password = password;
     }
 
     public int getId() {
@@ -35,6 +50,14 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -51,11 +74,4 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

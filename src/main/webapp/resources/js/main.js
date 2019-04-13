@@ -83,7 +83,7 @@ function renderUserList(data) {
 
     var newContent = "<table class=\"table table-dark\">";
     newContent += "<tr>";
-    newContent += "<th scope='col'>ID</th>";
+    newContent += "<th scope='col'>id</th>";
     newContent += "<th scope='col'>email</th>";
     newContent += "<th scope='col'>firstname</th>";
     newContent += "<th scope='col'>lastname</th>";
