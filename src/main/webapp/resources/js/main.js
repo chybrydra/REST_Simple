@@ -32,7 +32,7 @@ $("#users-option").click(function () {
 });
 
 function listAllCars() {
-    console.log('listAllCars');
+    console.log('listAllCars was invoked');
     $.ajax({
         type: 'GET',
         url: rootURL + "/cars",
@@ -42,7 +42,7 @@ function listAllCars() {
 }
 
 function listAllUsers() {
-    console.log('listAllUsers');
+    console.log('listAllUsers was invoked');
     $.ajax({
         type: 'GET',
         url: rootURL + "/users",
@@ -58,10 +58,11 @@ function renderCarList(data) {
 
     var newContent = "<table class=\"table table-dark\">";
     newContent += "<tr>";
-    newContent += "<th>ID</th>";
+    newContent += "<th>id</th>";
     newContent += "<th>brand</th>";
     newContent += "<th>model</th>";
     newContent += "<th>prod. year</th>";
+    newContent += "<th>reg. plate</th>";
     newContent += "</tr>";
     $.each(carList, function(index, car) {
         newContent += "<tr>";
@@ -69,6 +70,7 @@ function renderCarList(data) {
         newContent += "<th>" + car.brand + "</th>";
         newContent += "<th>" + car.model + "</th>";
         newContent += "<th>" + car.productionYear + "</th>";
+        newContent += "<th>" + car.regPlate + "</th>";
         newContent += "</tr>";
     });
     newContent += "</table>";
