@@ -21,4 +21,13 @@ public class CarController {
         return carsList;
     }
 
+    @GET
+    @Path("/add-car")
+    @Produces({MediaType.TEXT_HTML})
+    public String getAddCarFormAsHtml() {
+        CarService service = new CarService();
+        String addCarForm = service.generateAddCarFormAsHtml();
+        return addCarForm;
+    }
+
 }

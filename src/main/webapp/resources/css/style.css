@@ -2,3 +2,7 @@ body {
     background-color: #131415;
     color: #DDDDAA;
 }
+
+.menu-option:hover {
+    cursor: pointer;
+}

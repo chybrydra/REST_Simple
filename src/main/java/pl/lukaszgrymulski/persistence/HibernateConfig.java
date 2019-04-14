@@ -8,6 +8,7 @@ import org.hibernate.service.ServiceRegistry;
 import pl.lukaszgrymulski.models.Car;
 import pl.lukaszgrymulski.models.User;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.Properties;
 
 public class HibernateConfig {

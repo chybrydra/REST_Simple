@@ -13,22 +13,28 @@ function changeActiveOption(newActive) {
     $("#users-option").removeClass("active");
     $("#home-option").removeClass("active");
     $("#cars-option").removeClass("active");
+    $("#add-car-option").removeClass("active");
     $(newActive).addClass("active");
 }
 
-$("#home-option").click(function () {
+$("#home-option").click(function() {
     changeActiveOption("#home-option");
     showHome();
 });
 
-$("#cars-option").click(function () {
+$("#cars-option").click(function() {
     changeActiveOption("#cars-option");
     listAllCars();
 });
 
-$("#users-option").click(function () {
+$("#users-option").click(function() {
     changeActiveOption("#users-option");
     listAllUsers();
+});
+
+$("#add-car-option").click(function() {
+    changeActiveOption("#add-car-option");
+    loadAddCarForm();
 });
 
 function listAllCars() {
@@ -103,4 +109,19 @@ function renderUserList(data) {
     newContent += "</table>";
 
     $("#pageContent").append(newContent);
+}
+
+function loadAddCarForm() {
+    console.log('loadAddCarForm function was invoked');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "/add-car",
+        dataType: "html", // data type of response
+        success: renderAddCarForm
+    });
+}
+
+function renderAddCarForm(response) {
+    $('#pageContent').html("");
+    $("#pageContent").append(response).html();
 }
